@@ -1,4 +1,4 @@
-package oop.Fan;
+package oop.fan;
 
 
 class Fan {

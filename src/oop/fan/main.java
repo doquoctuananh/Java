@@ -1,4 +1,4 @@
-package oop.Fan;
+package oop.fan;
 
 public class main {
     public static void main(String[] args) {

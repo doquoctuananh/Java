@@ -1,4 +1,4 @@
-package oop.stopWatch;
+package oop.stop_watch;
 
 import java.time.LocalTime;
 

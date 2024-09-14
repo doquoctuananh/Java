@@ -1,4 +1,4 @@
-package access_modifier.Student;
+package access_modifier.student;
 
 class Student {
     private String name ="John";

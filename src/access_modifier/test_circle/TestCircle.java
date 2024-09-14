@@ -1,14 +1,14 @@
-package access_modifier.testCircle;
+package access_modifier.test_circle;
 
-class testCircle {
+class TestCircle {
     private double radius =1.0;
     private String color = "red";
 
-    public testCircle(double radius) {
+    public TestCircle(double radius) {
         this.radius = radius;
     }
 
-    public testCircle() {
+    public TestCircle() {
     }
 
     public void setRadius(double radius) {

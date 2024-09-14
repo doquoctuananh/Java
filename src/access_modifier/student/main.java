@@ -1,4 +1,4 @@
-package access_modifier.Student;
+package access_modifier.student;
 
 public class main {
     public static void main(String[] args) {

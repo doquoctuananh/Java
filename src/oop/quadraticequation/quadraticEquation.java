@@ -1,4 +1,4 @@
-package oop.quadraticEquation;
+package oop.quadraticequation;
 
 public class quadraticEquation {
     private double a ;
