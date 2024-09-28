@@ -12,9 +12,18 @@ public class Foreign extends Person{
         this.country = country;
     }
 
-    public Foreign(String idPerson, String name, String idBill, LocalDate dateBill, int consume, float price, String country) {
-        super(idPerson, name, idBill, dateBill, consume, price);
+    public Foreign(String idPerson, String name, String country) {
+        super(idPerson, name);
         this.country = country;
+    }
+
+    public Foreign(String idPerson, String name, LocalDate dateBill, int consume, float price, String country) {
+        super(idPerson, name, dateBill, consume, price);
+        this.country = country;
+    }
+    public Foreign(String idBill,String idPerson, LocalDate dateBill, int consume, float price) {
+        super(idBill,idPerson, dateBill, consume, price);
+
     }
 
     public String getCountry() {
@@ -36,6 +45,15 @@ public class Foreign extends Person{
                 ", Country='" + this.getCountry()+'\'' +
                 '}';
     }
+
+    public String inforForeignKhCsv() {
+        return
+                "id='" + super.getIdPerson() +'\''+
+                ", name='" + super.getName() + '\'' +
+                ", Country='" + this.getCountry()+'\''
+                ;
+    }
+
 
     public double totalMoney(){
         return super.getConsume() * super.getPrice();

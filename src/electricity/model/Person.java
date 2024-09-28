@@ -3,9 +3,10 @@ package electricity.model;
 import java.time.LocalDate;
 
 public abstract class Person {
+    public static int count =0;
     private String idPerson;
     private String name;
-    private String idBill ;
+    public static String idBill = "MHD-" + count;
     private LocalDate dateBill ;
     private int consume;
     private float price;
@@ -13,13 +14,24 @@ public abstract class Person {
     public Person() {
     }
 
-    public Person(String idPerson, String name, String idBill, LocalDate dateBill, int consume, float price) {
+    public Person(String idPerson, String name, LocalDate dateBill, int consume, float price) {
         this.idPerson = idPerson;
         this.name = name;
-        this.idBill = idBill;
+        count++;
         this.dateBill = dateBill;
         this.consume = consume;
         this.price = price;
+    }
+
+    public Person(String idPerson, String name,float price) {
+        this.idPerson = idPerson;
+        this.name = name;
+        this.price= price;
+    }
+
+    public Person(String idPerson, String name) {
+        this.idPerson = idPerson;
+        this.name = name;
     }
 
     public String getIdPerson() {

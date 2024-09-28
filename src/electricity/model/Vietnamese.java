@@ -10,11 +10,27 @@ public class Vietnamese extends Person{
         this.typeCustomer = typeCustomer;
         this.limitConsume = limitConsume;
     }
-
-    public Vietnamese(String idPerson, String name, String idBill, LocalDate dateBill, int consume, float price, String typeCustomer, int limitConsume) {
-        super(idPerson, name, idBill, dateBill, consume, price);
+    public Vietnamese(String idPerson, String name ,float price, String typeCustomer, int limitConsume) {
+        super(idPerson, name,price);
         this.typeCustomer = typeCustomer;
         this.limitConsume = limitConsume;
+    }
+
+    public Vietnamese(String idPerson, String name, LocalDate dateBill, int consume, float price, String typeCustomer, int limitConsume) {
+        super(idPerson, name, dateBill, consume, price);
+        this.typeCustomer = typeCustomer;
+        this.limitConsume = limitConsume;
+    }
+
+    public Vietnamese(String idPerson, String name, String typeCustomer, int limitConsume) {
+        super(idPerson, name);
+        this.typeCustomer = typeCustomer;
+        this.limitConsume = limitConsume;
+    }
+
+    public Vietnamese(String idBill,String idPerson, LocalDate dateBill, int consume, float price) {
+        super(idBill,idPerson, dateBill, consume, price);
+
     }
 
     public Vietnamese() {
@@ -48,6 +64,14 @@ public class Vietnamese extends Person{
         return total;
     }
 
+    public String infoKhCsv() {
+        return
+                "id='" + super.getIdPerson() +'\''+
+                ", name='" + super.getName() + '\'' +
+                ", typeCustomer='" + this.getTypeCustomer()+'\'' +
+                ", Limit quantity='" + this.getLimitConsume()+'\''
+                ;
+    }
     @Override
     public String toString() {
         return "Vietnam{" +
