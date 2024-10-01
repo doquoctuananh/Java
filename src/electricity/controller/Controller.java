@@ -43,7 +43,6 @@ public class Controller {
 
                     }
                 }
-
             }
             // kiem tra xem loaikhach.csv da ton tai chua
             if(!typeCustomer.exists()){
@@ -61,7 +60,7 @@ public class Controller {
                 if(createBill){
                     System.out.println("Create file hoadon.csv succesfully");
                 }
-                try(FileWriter fileBill = new FileWriter(bill,true)){
+                try(FileWriter fileBill = new FileWriter(bill)){
                     fileBill.write("Mã hóa đơn, Mã khách hàng,  ngày ra hoá đơn .số lượng (số KW tiêu thụ), đơn giá, thành tiền.");
 
                 }
@@ -89,8 +88,6 @@ public class Controller {
             int option = Integer.parseInt(sc.nextLine());
             switch (option){
                 case 1:
-                    //FileWriter fileWriteCustomer = new FileWriter("E:/Back-End Java CodeGym/Exercise/Java/Electricity_Customer/khachhang.csv",true);
-                    //FileWriter fileTypeCustomer = new FileWriter("E:/Back-End Java CodeGym/Exercise/Java/Electricity_Customer/loaikhach.csv",true);
                     try(FileWriter fileWriteCustomer = new FileWriter("E:/Back-End Java CodeGym/Exercise/Java/Electricity_Customer/khachhang.csv",true)){
                         try(FileWriter fileTypeCustomer = new FileWriter("E:/Back-End Java CodeGym/Exercise/Java/Electricity_Customer/loaikhach.csv",true)){
                             ServiceElectricity.addCustomer(fileWriteCustomer,fileTypeCustomer);
@@ -99,8 +96,6 @@ public class Controller {
                     catch (IOException e){
                         e.printStackTrace();
                     }
-
-
                     break;
                 case 2:
                     System.out.println("Enter show Customer in khachhang.csv: \n" );
@@ -128,17 +123,47 @@ public class Controller {
                 case 4:
 
                     try(FileReader showInfo = new FileReader("E:/Back-End Java CodeGym/Exercise/Java/Electricity_Customer/khachhang.csv")){
-                        //ServiceElectricity.getInformation(showInfo);
-                        try(FileWriter addBill = new FileWriter("E:/Back-End Java CodeGym/Exercise/Java/Electricity_Customer/hoadon.csv",true)){
-                            ServiceElectricity.addBill(addBill,showInfo);
+                        ServiceElectricity.getInformation(showInfo);
+                        showInfo.close();
+                        try(FileWriter addBill = new FileWriter("E:/Back-End Java CodeGym/Exercise/Java/Electricity_Customer/hoadon.csv",true);
+                            FileReader showInfoAgain = new FileReader("E:/Back-End Java CodeGym/Exercise/Java/Electricity_Customer/khachhang.csv")){
+                            ServiceElectricity.addBill(addBill,showInfoAgain);
                         }
                     }
                     catch (IOException e){
                         e.printStackTrace();
                     }
-
-
                     break;
+                case 5:
+                    try(FileReader reader = new FileReader("E:/Back-End Java CodeGym/Exercise/Java/Electricity_Customer/hoadon.csv")){
+                        ServiceElectricity.getInformation(reader);
+                        reader.close();
+                        try(FileReader updateBill = new FileReader("E:/Back-End Java CodeGym/Exercise/Java/Electricity_Customer/hoadon.csv");
+                            FileReader customers = new FileReader("E:/Back-End Java CodeGym/Exercise/Java/Electricity_Customer/khachhang.csv")
+                        ){
+                            ServiceElectricity.updateBill(updateBill,customers);
+                        }
+                    }
+                    catch (IOException e){
+                        e.printStackTrace();
+                    }
+                    break;
+                case 6:
+                    try(FileReader reader = new FileReader("E:/Back-End Java CodeGym/Exercise/Java/Electricity_Customer/hoadon.csv")){
+                        ServiceElectricity.getInformation(reader);
+                        reader.close();
+                        try(FileReader billReader = new FileReader("E:/Back-End Java CodeGym/Exercise/Java/Electricity_Customer/hoadon.csv");
+                            FileReader customers = new FileReader("E:/Back-End Java CodeGym/Exercise/Java/Electricity_Customer/khachhang.csv")
+                        ){
+                            ServiceElectricity.showDetailBill(billReader,customers);
+                        }
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    break;
+                case 7:
+                    System.exit(0);
             }
         }
     }

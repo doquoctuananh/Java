@@ -6,6 +6,7 @@ import electricity.model.Vietnamese;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -123,15 +124,6 @@ public class ServiceElectricity {
     public static void addBill(FileWriter addBill,FileReader showInfo) throws IOException {
         BufferedReader bufferReader = new BufferedReader(showInfo);
         String reader = null;
-        while((reader = bufferReader.readLine())!= null){
-            if(reader.contains("idPerson")){
-                continue;
-            }
-            else{
-                System.out.println(reader);
-            }
-        }
-        bufferReader = new BufferedReader(new FileReader("E:/Back-End Java CodeGym/Exercise/Java/Electricity_Customer/khachhang.csv"));
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Id Person chose");
@@ -144,37 +136,172 @@ public class ServiceElectricity {
         System.out.println("Enter Price");
         float price = Float.parseFloat(sc.nextLine());
 
-
         while((reader = bufferReader.readLine())!= null){
-
             String[] splitRow = reader.split(",");
-            
             if(splitRow[0].toUpperCase().equals(idPerson.toUpperCase())){
-                if(splitRow[0].toUpperCase().contains("KHVN")){
-                    int count = Person.count++;
+
+                if(idPerson.toUpperCase().contains("KHVN")){
+                    Person.count++;
+                    Person.updateIdBill();
                     String mhd = Person.idBill;
                     Vietnamese vn = new Vietnamese(mhd,splitRow[0],dateBill,kwQuantity,price);
                     vn.setLimitConsume(Integer.parseInt(splitRow[3]));
                     String bill = "\n"+mhd+","+splitRow[0]+","+dateBill+","+kwQuantity+","+price+","+ vn.totalMoney();
                     System.out.println(bill);
                     addBill.write(bill);
+                    break;
                 }
-                else if(splitRow[0].toUpperCase().contains("KHNN")){
-                    int count = Person.count++;
+                else if(idPerson.toUpperCase().contains("KHNN")){
+                    Person.count++;
+                    Person.updateIdBill();
                     String mhd = Person.idBill;
                     Foreign foreign = new Foreign(mhd,splitRow[0],dateBill,kwQuantity,price);
-
                     String bill = "\n"+mhd+","+splitRow[0]+","+dateBill+","+kwQuantity+","+price+","+ foreign.totalMoney();
                     System.out.println(bill);
                     addBill.write(bill);
+                    break;
                 }
-            }
-            else{
-                break;
             }
         }
         bufferReader.close();
         addBill.flush();
         addBill.close();
     }
+
+    // chuc nang chinh sua hoa don
+    public static void updateBill(FileReader bill,FileReader customer) throws  IOException{
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> lineStringBill = new ArrayList<>();
+        System.out.println("Enter code bill need update");
+        String codeBill = sc.nextLine();
+        String readBill = null;
+        BufferedReader bufferedReaderBill = new BufferedReader(bill);
+
+        boolean findCusomer = false;
+        boolean findbill = false ;
+        //doc file hoadon den ma hoa don can doi
+        while((readBill = bufferedReaderBill.readLine())!=null){
+
+            String[] readlineBill = readBill.split(",");
+            if(readlineBill[0].toUpperCase().equals(codeBill.toUpperCase())){
+                findbill = true;
+                System.out.println("Enter update new code Customer ");
+                String changeCodeCustomer = sc.nextLine();
+                BufferedReader bufferReaderCustomer = new BufferedReader(customer);
+                String reader = null;
+
+                // doc file khach hang coi co ton tai khach hang can update
+                while((reader = bufferReaderCustomer.readLine())!= null){
+                    String[] readerLineCustomer = reader.split(",");
+                    // neu ma khach hang co ton tai
+                    if(readerLineCustomer[0].toUpperCase().equals(changeCodeCustomer.toUpperCase())){
+                        findCusomer = true;
+                        if(changeCodeCustomer.toUpperCase().contains("KHVN")){
+
+                            readlineBill[1] = changeCodeCustomer.toUpperCase();
+
+                            System.out.println("Enter date out bill update");
+                            LocalDate dateBillUpdate = LocalDate.parse(sc.nextLine());
+                            readlineBill[2]=dateBillUpdate.toString();
+
+                            System.out.println("Enter Kw quatity update");
+                            int kwQuantityUpdate = Integer.parseInt(sc.nextLine());
+                            readlineBill[3]=Integer.toString(kwQuantityUpdate);
+
+                            System.out.println("Enter Price update");
+                            float priceUpdate = Float.parseFloat(sc.nextLine());
+                            readlineBill[4]=Float.toString(priceUpdate);
+
+                            Vietnamese vn = new Vietnamese(readlineBill[0],changeCodeCustomer,
+                                    dateBillUpdate, kwQuantityUpdate,priceUpdate  );
+                            readlineBill[5]=Double.toString(vn.totalMoney());
+
+                            lineStringBill.add(String.join(",",readlineBill));
+                            break;
+                            //bufferReaderCustomer.close();
+
+                        }
+                        else if(changeCodeCustomer.toUpperCase().contains("KHNN")){
+
+                            readlineBill[1] = changeCodeCustomer.toUpperCase();
+
+                            System.out.println("Enter date out bill update");
+                            LocalDate dateBillUpdate = LocalDate.parse(sc.nextLine());
+                            readlineBill[2]=dateBillUpdate.toString();
+
+                            System.out.println("Enter Kw quatity update");
+                            int kwQuantityUpdate = Integer.parseInt(sc.nextLine());
+                            readlineBill[3]=Integer.toString(kwQuantityUpdate);
+
+                            System.out.println("Enter Price update");
+                            float priceUpdate = Float.parseFloat(sc.nextLine());
+                            readlineBill[4]=Float.toString(priceUpdate);
+
+                            Foreign vn = new Foreign(readlineBill[0],changeCodeCustomer,
+                                    dateBillUpdate, kwQuantityUpdate,priceUpdate  );
+                            readlineBill[5]=Double.toString(vn.totalMoney());
+
+                            lineStringBill.add(String.join(",",readlineBill));
+                            break;
+                        }
+                    }
+                }
+                bufferReaderCustomer.close();
+
+            }
+            if(!findbill){
+                lineStringBill.add(readBill);
+            }
+
+        }
+        if(findCusomer){
+            FileWriter updateBill = new FileWriter("E:/Back-End Java CodeGym/Exercise/Java/Electricity_Customer/hoadon.csv");
+            for(String line : lineStringBill) {
+                updateBill.write(line+"\n");
+            }
+            updateBill.close();
+        }
+        else{
+            System.out.println("update fail");
+        }
+        bufferedReaderBill.close();
+
+    }
+
+    // hien thi chi tiet hoa don
+    public static void showDetailBill(FileReader bill, FileReader customer) throws  Exception{
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Id bill : ");
+        String idBill = sc.nextLine();
+        boolean findBill = false;
+        //ArrayList<String> showDetailBill = new ArrayList<>();
+        BufferedReader readerBill = new BufferedReader(bill);
+        String lineBill = null;
+        while((lineBill = readerBill.readLine())!= null){
+            String [] arrLineBill = lineBill.split(",");
+            if(arrLineBill[0].toUpperCase().equals(idBill.toUpperCase())){
+                findBill = true;
+                BufferedReader readerCustomer = new BufferedReader(customer);
+                String lineCustomer = null;
+                while((lineCustomer = readerCustomer.readLine())!= null){
+                    String [] arrLineCustomer = lineCustomer.split(",");
+                    if(arrLineBill[1].toUpperCase().equals(arrLineCustomer[0])){
+                        arrLineBill[1] = arrLineCustomer[1];
+                        System.out.println("Detail bill :  "+ arrLineBill[0] + " "+ arrLineBill[1]+ " " +  arrLineBill[2]+ " "
+                        + arrLineBill[3]+ " " +arrLineBill[4]+ " " + arrLineBill[5]
+                        );
+                        break;
+                    }
+                }
+                readerCustomer.close();
+                break;
+            }
+        }
+        if(!findBill){
+            System.out.println("Not find id bill");
+        }
+        readerBill.close();
+    }
+
+
 }

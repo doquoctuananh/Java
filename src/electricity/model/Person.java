@@ -6,18 +6,20 @@ public abstract class Person {
     public static int count =0;
     private String idPerson;
     private String name;
-    public static String idBill = "MHD-" + count;
+    public static String idBill ;
     private LocalDate dateBill ;
     private int consume;
     private float price;
 
     public Person() {
     }
-
+    public static void updateIdBill(){
+        idBill = "MHD-" + count;
+    }
     public Person(String idPerson, String name, LocalDate dateBill, int consume, float price) {
         this.idPerson = idPerson;
         this.name = name;
-        count++;
+
         this.dateBill = dateBill;
         this.consume = consume;
         this.price = price;
