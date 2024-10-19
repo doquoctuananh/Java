@@ -1,0 +1,27 @@
+Phần mềm quản lý nhân viên của công ty được mô tả nghiệp vụ như sau:
+
+Mỗi nhân viên (Employee) được công ty chia thành 3 loại sau:
+ +Nhân viên có kinh nghiệm lâu năm (Experience),
+ +nhân viên mới ra trường (Fresher) ,
+ +Nhân viên thực tập (Intern)
+
+Tất cả các Employee đều có các thuộc tính là: ID, FullName, BirthDay,Phone, Email (Trong đó Id id tự tăng không cần nhập)
+
+Trong đó : Employee_type có giá trị tương ứng là 1: Experience, 2: Fresher , 3: Intern  (tùy vào người dùng nhập vào ứng viên loại nào)
+
+Ngoài ra :
++ Đối với nhân viên Experience có thêm thuộc tính: Số năm kinh nghiệm (ExpInYear), Kỹ năng chuyên môn (ProSkill)
++ Đối với nhân viênn Fresher có thêm thuộc tính: Thời gian tốt nghiệp(Graduation_date) , Trường tốt nghiệp (Education)
++ Đối với nhân viên Intern có thêm thuộc tính: Chuyên ngành đang học (Majors), Học kì đang học (Semester), Tên trường đang học (University_name)
+
+** Ngoài ra mỗi nhân viên khi vào làm cần phải nộp bằng cấp nghề nghiệp đi kèm, bộ phận tuyển dụng cần quản lý các bằng cấp này.
+Một nhân viên có thể có nhiều bằng cấp (Certificate)
+Với mỗi bằng cấp có các thông tin bao gồm : CertificatedID, CertificateName, CertificateRank, CertificatedDate.
+Trong file lưu chứng chỉ lưu theo id(Mã nhân viên của nhân viên loại nào),CertificatedID, CertificateName, CertificateRank, CertificatedDate.
+
+Yêu cầu tính năng:
+1. them nhan viên(Khi thêm hỏi người dung thêm loại nhân viên nào và nhập chứng chỉ cho nhân viên đó)
+2. hiển thị tất cả nhân viên (Hỏi người dung hiện thị loại nhân viên nào)
+3. cập nhật thông tin nhan vien(khi cập nhật Hỏi người dung cập nhật loại nhân viên loại nào và nhập mã id để update)
+4. tìm kiếm nhân viên (khi tim kiem Hỏi người dung tìm kiếm loại nhân viên loại nào và nhập mã id để tìm kiếm)
+5. xóa nhân viên (khi delete Hỏi người dung delete loại nhân viên loại nào và nhập mã id để delete)
