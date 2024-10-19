@@ -729,4 +729,117 @@ public class ServiceEmployee {
             }
         }
     }
+
+    // xem nhan vien co bao nhieu chung chi
+    public static void totalEmployeeHasCert(File fileExper, File fileFresher, File fileIntern,
+                                            File certExper,File certFresher, File certIntern){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Type employee search\n" +
+                "1.Employee Experience\n" +
+                "2.Employee Fresher\n" +
+                "3.Employee Intern");
+        int option =  Integer.parseInt(sc.nextLine());
+        switch (option){
+            case 1:{
+                System.out.println("Enter id: ");
+                int id = Integer.parseInt(sc.nextLine());
+                boolean find = false;
+                int findCert =0;
+                ArrayList<String> listEmployee = readFileEmployee(fileExper);//
+                if(listEmployee==null){
+                    System.out.println("File experience is empty");
+                }
+                else{
+                    for (int i = 0; i < listEmployee.size(); i++) {
+                        String[] split = listEmployee.get(i).split(",");
+                        if(Integer.parseInt(split[0])== id){
+                            ArrayList<String> listCert=  readCertList(certExper);//
+                            for (int j = 0; j < listCert.size(); j++) {
+                                String[] splitCert= listCert.get(i).split(",");
+                                if(Integer.parseInt(splitCert[0]) ==id){
+                                    ++findCert;
+                                }
+                            }
+                            find = true;
+                            break;
+                        }
+                    }
+                }
+                if(find==true){
+                    System.out.println("Employee has total certificate: "+ findCert);
+                }
+                else{
+                    System.out.println("Not find employee");
+                }
+                break;
+            }
+            case 2: {
+                System.out.println("Enter id: ");
+                int id = Integer.parseInt(sc.nextLine());
+                boolean find = false;
+                int findCert =0;
+                ArrayList<String> listEmployee = readFileEmployee(fileFresher);//
+                if(listEmployee==null){
+                    System.out.println("File experience is empty");
+                }
+                else{
+                    for (int i = 0; i < listEmployee.size(); i++) {
+                        String[] split = listEmployee.get(i).split(",");
+                        if(Integer.parseInt(split[0])== id){
+                            ArrayList<String> listCert=  readCertList(certFresher);//
+                            for (int j = 0; j < listCert.size(); j++) {
+                                String[] splitCert= listCert.get(i).split(",");
+                                if(Integer.parseInt(splitCert[0]) ==id){
+                                    ++findCert;
+                                }
+                            }
+                            find = true;
+                            break;
+                        }
+                    }
+                }
+                if(find==true){
+                    System.out.println("Employee has total certificate: "+ findCert);
+                }
+                else{
+                    System.out.println("Not find employee");
+                }
+                break;
+            }
+            case 3:{
+                System.out.println("Enter id: ");
+                int id = Integer.parseInt(sc.nextLine());
+                boolean find = false;
+                int findCert =0;
+                ArrayList<String> listEmployee = readFileEmployee(fileIntern);//
+                if(listEmployee==null){
+                    System.out.println("File experience is empty");
+                }
+                else{
+                    for (int i = 0; i < listEmployee.size(); i++) {
+                        String[] split = listEmployee.get(i).split(",");
+                        if(Integer.parseInt(split[0])== id){
+                            ArrayList<String> listCert=  readCertList(certIntern);//
+                            for (int j = 0; j < listCert.size(); j++) {
+                                String[] splitCert= listCert.get(i).split(",");
+                                if(Integer.parseInt(splitCert[0]) ==id){
+                                    ++findCert;
+                                }
+                            }
+                            find = true;
+                            break;
+                        }
+                    }
+                }
+                if(find==true){
+                    System.out.println("Employee has total certificate: "+ findCert);
+                }
+                else{
+                    System.out.println("Not find employee");
+                }
+                break;
+            }
+        }
+
+    }
 }

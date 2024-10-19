@@ -40,7 +40,8 @@ public class controller {
                     "3.Update information Employee\n" +
                     "4.Search Employee\n" +
                     "5.Delete employee\n" +
-                    "6.Exits");
+                    "6.Watch total certificate as employee\n" +
+                    "7.Exits");
             int option = Integer.parseInt(sc.nextLine());
             switch(option){
                 case 1 : {
@@ -71,6 +72,11 @@ public class controller {
                     break;
                 }
                 case 6:{
+                    ServiceEmployee.totalEmployeeHasCert(fileExperience,fileFresher,fileIntern,
+                            certificateExperience,certificateFresher,certificateIntern);
+                    break;
+                }
+                case 7:{
                     System.exit(0);
                 }
             }
