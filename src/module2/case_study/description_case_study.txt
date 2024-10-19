@@ -25,3 +25,5 @@ Yêu cầu tính năng:
 3. cập nhật thông tin nhan vien(khi cập nhật Hỏi người dung cập nhật loại nhân viên loại nào và nhập mã id để update)
 4. tìm kiếm nhân viên (khi tim kiem Hỏi người dung tìm kiếm loại nhân viên loại nào và nhập mã id để tìm kiếm)
 5. xóa nhân viên (khi delete Hỏi người dung delete loại nhân viên loại nào và nhập mã id để delete)
+6. Xem nhân viên cần tìm có bao nhiêu chứng chỉ(khi tim kiem Hỏi người dung tìm kiếm loại nhân viên loại nào và 
+nhập mã id để tìm kiếm sẽ hiện ra thông tin nhân viên đó và  tổng số chứng chỉ có)
