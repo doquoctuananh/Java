@@ -1,5 +1,6 @@
 package module2.case_study.service;
 
+import module2.case_study.common.ValidateGmail;
 import module2.case_study.model.*;
 
 import java.io.*;
@@ -95,7 +96,11 @@ public class ServiceEmployee {
         System.out.println("Enter phone: ");
         double phone = Double.parseDouble(sc.nextLine());
         System.out.println("Enter email: ");
-        String email = sc.nextLine();
+        String email =null;
+        do{
+            email = sc.nextLine();
+        }while(!ValidateGmail.checkEmail(email));
+
         System.out.println("Enter year experience: ");
         int yearExper = Integer.parseInt(sc.nextLine());
         System.out.println("Enter pro skill");
@@ -133,7 +138,10 @@ public class ServiceEmployee {
         System.out.println("Enter phone: ");
         double phone = Double.parseDouble(sc.nextLine());
         System.out.println("Enter email: ");
-        String email = sc.nextLine();
+        String email =null;
+        do{
+            email = sc.nextLine();
+        }while(!ValidateGmail.checkEmail(email));
         System.out.println("Enter graduation date");
         LocalDate graduation_date = LocalDate.parse(sc.nextLine());
         System.out.println("Enter university name: ");
@@ -174,7 +182,10 @@ public class ServiceEmployee {
         System.out.println("Enter phone: ");
         double phone = Double.parseDouble(sc.nextLine());
         System.out.println("Enter email: ");
-        String email = sc.nextLine();
+        String email =null;
+        do{
+            email = sc.nextLine();
+        }while(!ValidateGmail.checkEmail(email));
         System.out.println("Enter " + fullname + " major");
         String major = sc.nextLine();
         System.out.println("Enter semester ");
@@ -386,7 +397,11 @@ public class ServiceEmployee {
                             System.out.println("Enter update phone: ");
                             split[3] = Double.toString(Double.parseDouble(sc.nextLine())) ;
                             System.out.println("Enter update email: ");
-                            split[4] = sc.nextLine();
+                            String email =null;
+                            do{
+                                email = sc.nextLine();
+                            }while(!ValidateGmail.checkEmail(email));
+                            split[4] = email;
                             System.out.println("Enter update year experience: ");
                             split[5] = Integer.toString(Integer.parseInt(sc.nextLine()));
                             System.out.println("Enter update pro skill");
@@ -427,7 +442,11 @@ public class ServiceEmployee {
                             System.out.println("Enter update phone: ");
                             split[3] = Double.toString(Double.parseDouble(sc.nextLine())) ;
                             System.out.println("Enter update email: ");
-                            split[4] = sc.nextLine();
+                            String email =null;
+                            do{
+                                email = sc.nextLine();
+                            }while(!ValidateGmail.checkEmail(email));
+                            split[4] = email;
                             System.out.println("Enter update Date graduation");
                             split[5] = LocalDate.parse(sc.nextLine()).toString();
                             System.out.println("Enter update Name University");
@@ -468,7 +487,11 @@ public class ServiceEmployee {
                             System.out.println("Enter update phone: ");
                             split[3] = Double.toString(Double.parseDouble(sc.nextLine()));
                             System.out.println("Enter update email: ");
-                            split[4] = sc.nextLine();
+                            String email =null;
+                            do{
+                                email = sc.nextLine();
+                            }while(!ValidateGmail.checkEmail(email));
+                            split[4] = email;
                             System.out.println("Enter update major");
                             split[5] = sc.nextLine();
                             System.out.println("Enter update semester");
