@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("vocabulary")
 public class VocabularyServlet {
-
     @GetMapping("")
+    public String vocabulary(Model model) {
+        return "vocabulary";
+    }
+
+    @GetMapping("result")
     public String vocabulary(Model model,@RequestParam String vocabulary) {
-        if(vocabulary.equals("name")){
+        if(vocabulary.trim().equals("name")){
             model.addAttribute("name","tuan anh");
         }
         return "vocabulary";

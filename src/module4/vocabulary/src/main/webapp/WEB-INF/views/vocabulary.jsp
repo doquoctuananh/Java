@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="container">
-    <form action="vocabulary">
+    <form action="/vocabulary/result">
         <label>Enter Vocabulary</label>
         <input type="text" placeholder="Enter vocabulary" name="vocabulary">
         <button type="submit" class="btn btn-primary">Submit</button>
