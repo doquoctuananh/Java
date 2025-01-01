@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <a th:href="@{/create}" class="btn btn-primary">Create</a>
+    <div th:if="${songs.size()>0}">
+        <h1>List Song</h1>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Artist</th>
+                <th>Type</th>
+                <th>File Path</th>
+                <th>Upload</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="s: ${songs}">
+
+                <td th:text="${s.name}"></td>
+                <td th:text="${s.artist}"></td>
+                <td th:text="${s.type}"></td>
+                <td>
+                    <a th:href="@{/musicfile/{filepath}(filepath=${s.filepath})}" th:text="${s.filepath}"/>
+                </td>
+                <td>
+                    <a class="btn btn-warning" th:href="@{/update/{id}(id=${s.id})}" th:text="update"/>
+                </td>
+                <td>
+
+
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            th:data-bs-target="'#myModal'+${s.id}">
+                        Delete
+                    </button>
+
+                    <div class="modal" th:id="'myModal'+${s.id}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    Delete ?
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                                    <a class="btn btn-danger" th:href="@{/delete/{id}(id=${s.id})}" th:text="delete"/>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
