@@ -16,18 +16,50 @@
             <tr>
                 <th>STT</th>
                 <th>ID</th>
+                <th>Name</th>
                 <th>Birthday</th>
                 <th>Image</th>
+                <th>Delete</th>
+                <th>Update</th>
+                <th>View</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="customer,state :${customers}">
                 <td th:text="${state.count}"></td>
                 <td th:text="${customer.id}"></td>
+                <td th:text="${customer.name}"></td>
                 <td th:text="${customer.birthday}"></td>
 
                 <td>
-                   <img th:src="@{/image/${customer.img}}" style="width: 100px; height: 100px;">
+                   <img th:src="@{/image/${customer.img}}" style="width: 50px; height: 50px;">
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            th:data-bs-target="'#myModal'+${customer.id}">
+                        delete
+                    </button>
+                    <div class="modal" th:id="'myModal'+${customer.id}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    Delete ?
+                                </div>
+                                <div class="modal-footer">
+                                    <a class="btn btn-danger" th:href="@{/delete/{id}(id=${customer.id})}">Delete</a>
+                                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    <a class="btn btn-info" th:href="@{/update/{id}(id=${customer.id})}">Update</a>
+                </td>
+
+                <td>
+                    <a class="btn btn-primary" th:href="@{/view/{id}(id=${customer.id})}">View</a>
                 </td>
             </tr>
 

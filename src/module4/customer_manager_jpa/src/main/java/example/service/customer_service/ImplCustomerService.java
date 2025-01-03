@@ -25,11 +25,16 @@ public class ImplCustomerService implements ICustomerService{
 
     @Override
     public void delete(int id) {
-
+        customerRepository.delete(id);
     }
 
     @Override
-    public void findById(int id) {
+    public Customer findById(int id) {
+       return customerRepository.findById(id);
+    }
 
+    @Override
+    public void update(int id, Customer entity) {
+        customerRepository.update(id, entity);
     }
 }

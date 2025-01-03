@@ -29,11 +29,19 @@ public class ImplCustomerRepository implements ICustomerRepository {
 
     @Override
     public void delete(int id) {
-
+        em.remove(em.find(Customer.class, id));
     }
 
     @Override
-    public void findById(int id) {
-
+    public Customer findById(int id) {
+        return em.find(Customer.class, id);
     }
+
+    @Override
+    public void update(int id, Customer entity) {
+        entity.setId(id);
+        em.merge(entity);
+    }
+
+
 }

@@ -6,5 +6,6 @@ public interface IGenerateRepository<A> {
     List<A> findAll();
     void save(A entity);
     void delete(int id);
-    void findById(int id);
+    A findById(int id);
+    void update(int id,A entity);
 }

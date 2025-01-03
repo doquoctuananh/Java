@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -55,6 +52,42 @@ public class CustomerServlet {
         Customer customer = new Customer(customerForm.getName(),customerForm.getBirthday(),fileName);
         System.out.println(customer.toString());
         customerService.save(customer);
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteCustomer(Model model, @PathVariable int id) {
+        customerService.delete(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/view/{id}")
+    public String viewCustomer(Model model, @PathVariable int id) {
+        Customer customer = customerService.findById(id);
+        model.addAttribute("customer", customer);
+        return "view";
+    }
+
+    @GetMapping("/update/{id}")
+    public String updateCustomer(Model model, @PathVariable int id) {
+        Customer customer =customerService.findById(id);
+        model.addAttribute("customer", customer);
+        model.addAttribute("customerForm", new CustomerForm());
+        return "update";
+    }
+
+    @PostMapping("/update")
+    public String updateCustomer(Model model, @ModelAttribute CustomerForm customerForm,@RequestParam int id) {
+        MultipartFile multipartFile = customerForm.getImg();
+        String fileName = multipartFile.getOriginalFilename();
+        try{
+            FileCopyUtils.copy(multipartFile.getBytes(),new File(uploadFile+fileName));
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        Customer customer = new Customer(customerForm.getName(),customerForm.getBirthday(),fileName);
+        customerService.update(id, customer);
         return "redirect:/";
     }
 }
