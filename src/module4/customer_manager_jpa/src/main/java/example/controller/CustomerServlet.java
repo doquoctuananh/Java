@@ -50,8 +50,11 @@ public class CustomerServlet {
             e.printStackTrace();
         }
         Customer customer = new Customer(customerForm.getName(),customerForm.getBirthday(),fileName);
-        System.out.println(customer.toString());
-        customerService.save(customer);
+
+        //customerService.save(customer);
+
+        //thuc hien luu gia tri customer voi ham store procedure
+        customerService.saveProcedure(customer);
         return "redirect:/";
     }
 

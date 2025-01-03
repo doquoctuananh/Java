@@ -4,9 +4,9 @@ import example.model.Customer;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -41,6 +41,19 @@ public class ImplCustomerRepository implements ICustomerRepository {
     public void update(int id, Customer entity) {
         entity.setId(id);
         em.merge(entity);
+    }
+
+    @Override
+    public void saveProcedure(Customer entity) {
+        String jpql = "call insert_customer(?1,?2,?3)";
+        StoredProcedureQuery query = em.createStoredProcedureQuery("insert_customer")
+                .registerStoredProcedureParameter(1, String.class, ParameterMode.IN)
+                .setParameter(1, entity.getName())
+                .registerStoredProcedureParameter(2, java.sql.Date.class, ParameterMode.IN)
+                .setParameter(2, java.sql.Date.valueOf(entity.getBirthday()))
+                .registerStoredProcedureParameter(3, String.class, ParameterMode.IN)
+                .setParameter(3, entity.getImg());
+        query.execute();
     }
 
 

@@ -37,4 +37,9 @@ public class ImplCustomerService implements ICustomerService{
     public void update(int id, Customer entity) {
         customerRepository.update(id, entity);
     }
+
+    @Override
+    public void saveProcedure(Customer entity) {
+        customerRepository.saveProcedure(entity);
+    }
 }

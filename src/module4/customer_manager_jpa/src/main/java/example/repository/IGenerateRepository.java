@@ -8,4 +8,5 @@ public interface IGenerateRepository<A> {
     void delete(int id);
     A findById(int id);
     void update(int id,A entity);
+    void saveProcedure(A entity);
 }
