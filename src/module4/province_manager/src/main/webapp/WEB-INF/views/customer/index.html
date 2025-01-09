@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <a class="btn btn-primary" th:href="@{/customer/create}">Create Customer</a>
+    <div th:if="${customers.size()>0}">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                <th>View</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="customer,state:${customers}">
+                <td th:text="${state.count}"></td>
+                <td th:text="${customer.id}"></td>
+                <td th:text="${customer.firstName}"></td>
+                <td th:text="${customer.lastName}"></td>
+                <td>
+                    <a class="btn btn-warning" th:href="@{/customer/edit(id=${customer.id})}">Edit</a>
+                </td>
+                <td>
+                    <!--                    <a class="btn btn-danger" th:href="@{/province/delete(id=${province.id})}">Delete</a>-->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#myModal'+${customer.id}">
+                        Delete
+                    </button>
+                    <div class="modal" th:id="'myModal'+${customer.id}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    Do you delete ?
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <a th:href="@{/customer/delete(id=${customer.id})}"
+                                       type="button" class="btn btn-danger">
+                                        Delete
+                                    </a>
+                                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <a class="btn btn-info" th:href="@{/customer/view(id=${customer.id})}">View</a>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
