@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .pagination .page-item.active .page-link{
+            background-color: aquamarine;
+        }
+
+        .pagination .page-item .page-link:hover {
+            background-color: black;
+            color:white;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <a class="btn btn-primary" th:href="@{/customer/create}">Create Customer</a>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Birthday</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer:${customers.content}">
+            <td th:text="${customer.id}"></td>
+            <td th:text="${customer.name}"></td>
+            <td th:text="${customer.address}"></td>
+            <td th:text="${customer.phone}"></td>
+            <td th:text="${customer.birthday}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul class="pagination">
+        <li class="page-item" th:if="${customers.hasPrevious()}">
+            <a class="page-link" th:href="@{/customer(page=${customers.number - 1})}">Previous</a>
+        </li>
+
+        <li class="page-item" th:each="pageNum: ${#numbers.sequence(0, customers.totalPages - 1)}"
+            th:classappend="${pageNum == customers.number ? 'active':''}"
+        >
+            <a class="page-link" th:href="@{/customer(page=${pageNum})}" th:text="${pageNum+1}"></a>
+        </li>
+
+        <li class="page-item" th:if="${customers.hasNext()}">
+            <a class="page-link" th:href="@{/customer(page=${customers.number + 1})}">Next</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
