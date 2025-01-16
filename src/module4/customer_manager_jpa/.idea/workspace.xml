@@ -5,12 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="260730cf-5c64-438c-835b-da72875e8ea7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/example/controller/CustomerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/example/controller/CustomerServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/example/repository/IGenerateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/example/repository/IGenerateRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/example/repository/customer_repository/ImplCustomerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/example/repository/customer_repository/ImplCustomerRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/example/service/IGenerateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/example/service/IGenerateService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/example/service/customer_service/ImplCustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/example/service/customer_service/ImplCustomerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../jpa_customer/src/main/java/example/config/AppConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jpa_customer/src/main/java/example/config/AppConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../jpa_customer/src/main/java/example/config/AppInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jpa_customer/src/main/java/example/config/AppInit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../jpa_customer/src/main/java/example/controller/CustomerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jpa_customer/src/main/java/example/controller/CustomerServlet.java" afterDir="false" />
@@ -223,6 +217,7 @@
       <workItem from="1735870713142" duration="58000" />
       <workItem from="1735871471207" duration="2243000" />
       <workItem from="1735914121534" duration="2345000" />
+      <workItem from="1735986979133" duration="58000" />
     </task>
     <servers />
   </component>
