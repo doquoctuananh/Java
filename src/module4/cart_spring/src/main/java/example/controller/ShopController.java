@@ -33,11 +33,15 @@ public class ShopController {
     }
 
     @GetMapping("/cart/addCart/{id}")
-    public String addCart(@PathVariable("id") int id, Model model,
+    public String addCart(@PathVariable("id") int id, Model model,@RequestParam(value = "page",defaultValue = "0") int page,
                           @ModelAttribute(value = "yourCart") Cart yourCart) {
         Product product = productService.findProductById(id);
         yourCart.addCart(product);
-        return "redirect:/";
+
+        Pageable pageable = PageRequest.of(page, 2);
+        Page<Product> products = productService.getProducts(pageable);
+        model.addAttribute("products", products);
+        return "index";
     }
 
 }

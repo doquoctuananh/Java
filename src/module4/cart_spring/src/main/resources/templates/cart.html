@@ -27,7 +27,11 @@
         <tbody>
         <tr th:each="product: ${cart.getProducts()}">
             <td th:text="${product.getKey().name}"></td>
-            <td th:text="${product.getValue()}"></td>
+            <td>
+                <a th:href="@{/cart/reduce/{id}(id=${product.getKey().id})}">-</a>
+                <span th:text="${product.getValue()}"></span>
+                <a th:href="@{/cart/increase/{id}(id=${product.getKey().id})}">+</a>
+            </td>
             <td th:text="${product.getKey().price}"></td>
         </tr>
         </tbody>

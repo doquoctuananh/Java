@@ -20,4 +20,20 @@ public class CartController {
         return "cart";
     }
 
+    @RequestMapping("/increase/{id}")
+    public String increase(@SessionAttribute(name="yourCart")Cart yourCart,Model model,
+                         @PathVariable int id) {
+        Product product = productService.findProductById(id);
+        yourCart.addCart(product);
+        return "redirect:/cart";
+    }
+
+    @RequestMapping("/reduce/{id}")
+    public String reduce(@SessionAttribute(name = "yourCart") Cart yourCart,Model model,
+                         @PathVariable int id) {
+        Product product = productService.findProductById(id);
+        yourCart.removeProductInCart(product);
+
+        return "redirect:/cart";
+    }
 }

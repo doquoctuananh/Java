@@ -55,6 +55,19 @@ public class Cart {
         }
     }
 
+    public void removeProductInCart(Product product) {
+        for(Map.Entry<Product,Integer> entry : products.entrySet()) {
+            if(entry.getKey().getId() == product.getId()){
+                if(entry.getValue() == 1){
+                    products.remove(entry.getKey());
+                }
+                else{
+                    products.replace(entry.getKey(),entry.getValue() - 1);
+                }
+            }
+        }
+    }
+
     //dem san pham trong gio hang
     public int countProductCart() {
         return products.size();
