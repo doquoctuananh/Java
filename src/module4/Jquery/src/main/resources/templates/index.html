@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="application/javascript">
+        $(document).ready(() =>{
+            $(".hide").click(() => {
+                $(".psh").hide();
+            })
+
+            $(".show").click(() => {
+                $(".psh").show();
+            })
+
+            $(".animate").click(() => {
+                $(".divanimate").animate({left:'250px', fontSize: '50px'})
+            })
+        })
+
+    </script>
+
+</head>
+<body>
+<div>
+    <div class="showhide">
+        <p class="psh">show and hide</p>
+        <button class="show">show</button>
+        <button class="hide">hide</button>
+    </div>
+
+    <div class="divanimate" style="height: 150px; width: 150px; background-color: red">
+        <h1>header</h1>
+    </div>
+    <button class="animate">Animate</button>
+</div>
+</body>
+</html>
