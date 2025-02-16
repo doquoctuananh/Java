@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/}">Tro ve trang chu</a>
+<h1>Them moi hoc vien</h1>
+<form th:action="@{/add-student}" method="post" th:object="${studentDTO}">
+    Ten
+    <input type="text" th:field="*{name}">
+    <p th:if="${#fields.hasErrors()}" th:errors="*{name}"></p>
+    Gioi tinh
+    <input type="radio" th:field="*{gender}" value="true"> Nam
+    <input type="radio" th:field="*{gender}" value="false"> Nu
+    <p th:if="${#fields.hasErrors()}" th:errors="*{gender}"></p>
+
+    Lop
+    <select th:field="*{clazz}">
+        <option th:each="c: ${clazzes}" th:value="${c.id}" th:text="${c.name}"></option>
+    </select>
+
+
+    <input type="submit" value="submit">
+</form>
+</body>
+</html>

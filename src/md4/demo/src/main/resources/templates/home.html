@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Trang chủ
+
+<a th:href="@{/create-form}">Thêm mới học viên</a>
+<p th:text="${msg}"></p>
+<h1>Danh sach hoc vien</h1>
+<table>
+    <thead>
+        <tr>
+            <th th:text="#{app.serial}"></th>
+            <th th:text="#{app.name}"></th>
+            <th th:text="#{app.gender}"></th>
+            <th th:text="#{app.classname}"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="s,l : ${students}">
+            <td th:text="${l.count}"></td>
+            <td th:text="${s.name}"></td>
+            <td th:if="${s.gender == true}">Nam</td>
+            <td th:unless="${s.gender == true}">Nu</td>
+            <td th:text="${s.clazz.name}"></td>
+        </tr>
+    </tbody>
+</table>
+<a th:href="@{/(page=${students.number - 1})}" th:if="${students.hasPrevious()}">Trang trước</a>
+<a th:text="${students.number + 1} + '/' + ${students.totalPages}"></a>
+<a th:href="@{/(page=${students.number + 1})}" th:if="${students.hasNext()}">Trang sau</a>
+</body>
+</html>
