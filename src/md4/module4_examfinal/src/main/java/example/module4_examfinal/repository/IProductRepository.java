@@ -16,10 +16,12 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findAll( Pageable pageable);
 
     @Query("SELECT p FROM Product p WHERE " +
-            "(:name IS NULL OR p.nameProduct LIKE %:name%) " +
+            "(:name IS NULL OR p.nameProduct LIKE CONCAT('%',:name,'%')) " +
             "AND (:price IS NULL OR p.price >= :price) " +
             "AND (:typeId IS NULL OR p.typeProduct.id = :typeId)")
-    List<Product> searchProducts(@Param("name") String name,
+    Page<Product> searchProducts(@Param("name") String name,
                                  @Param("price") Double price,
-                                 @Param("typeId") Long typeId);
+                                 @Param("typeId") Long typeId,
+                                 Pageable pageable);
+
 }

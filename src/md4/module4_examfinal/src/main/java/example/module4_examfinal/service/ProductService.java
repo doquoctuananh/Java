@@ -32,7 +32,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public List<Product> searchProducts(String name, Double price, Long typeId) {
-        return productRepository.searchProducts(name, price, typeId);
+    public Page<Product> searchProducts(String name, Double price, Long typeId,Pageable pageable) {
+        return productRepository.searchProducts(name, price, typeId,pageable);
     }
 }

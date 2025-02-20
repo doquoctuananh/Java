@@ -45,8 +45,10 @@ public class HomeController {
     public String search(@RequestParam(name = "searchname",required = false) String searchname,
                          @RequestParam(name = "seachprice",required = false) Double seachprice,
                          @RequestParam(name = "searchTypeId",required = false) Long searchTypeId,
+                         @RequestParam(name = "page",defaultValue = "0") int page,
                          Model model) {
-        List<Product> products = productService.searchProducts(searchname, seachprice, searchTypeId);
+        Pageable pageable = PageRequest.of(page, 5);
+        Page<Product> products = productService.searchProducts(searchname, seachprice, searchTypeId,pageable);
         model.addAttribute("products", products);
 
         List<TypeProduct> typeProducts = typeProductService.findAllTypeProducts();

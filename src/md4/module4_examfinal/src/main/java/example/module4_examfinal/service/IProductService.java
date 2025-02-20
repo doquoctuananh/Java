@@ -12,5 +12,5 @@ public interface IProductService {
     Product findProductById(int id);
     void saveProduct(Product product);
 
-    List<Product> searchProducts(String name, Double price, Long typeId);
+    Page<Product> searchProducts(String name, Double price, Long typeId,Pageable pageable);
 }
