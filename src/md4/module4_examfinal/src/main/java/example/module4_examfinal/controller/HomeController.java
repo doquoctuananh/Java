@@ -35,4 +35,23 @@ public class HomeController {
         model.addAttribute("typeProducts", typeProducts);
         return "index";
     }
+
+    @GetMapping("/search/reset")
+    public String reset(Model model) {
+        return "redirect:/";
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam(name = "searchname",required = false) String searchname,
+                         @RequestParam(name = "seachprice",required = false) Double seachprice,
+                         @RequestParam(name = "searchTypeId",required = false) Long searchTypeId,
+                         Model model) {
+        List<Product> products = productService.searchProducts(searchname, seachprice, searchTypeId);
+        model.addAttribute("products", products);
+
+        List<TypeProduct> typeProducts = typeProductService.findAllTypeProducts();
+        model.addAttribute("typeProducts", typeProducts);
+
+        return "index";
+    }
 }

@@ -10,6 +10,40 @@
 <body>
 <div class="containier">
     <a class="btn btn-dark" th:href="@{/product/create}">Them san pham</a>
+
+    <h2>Tim kien san pham</h2>
+    <form th:action="@{/search}" method="get">
+        <div class="row">
+            <div class="col">
+                Ten
+                <input type="text" class="form-control"  name="searchname">
+            </div>
+            <div class="col">
+                Price
+                <input type="number" class="form-control" name="seachprice">
+            </div>
+            <div class="col">
+                Type
+                <select id="type" name="searchTypeId">
+                    <option value="">-- Chọn loại sản phẩm --</option>
+                    <option th:each="typeProduct : ${typeProducts}"
+                            th:value="${typeProduct.id}"
+                            th:text="${typeProduct.name}">
+<!--                            th:selected="${typeProduct.id == searchTypeId}"-->
+
+                    </option>
+                </select>
+            </div>
+
+            <div class="col">
+                <button class="btn btn-info" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <a class="btn btn-info" type="submit" th:href="@{/search/reset}">Reset Search</a>
+
+
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -24,7 +58,7 @@
         </thead>
         <tbody>
         <tr th:each="product,status :${products}">
-            <td th:text="${status.count}"></td>
+            <td th:text="${status.index + 1 + (products.number * products.size)}"></td>
             <td th:text="${product.nameProduct}"></td>
             <td th:text="${product.price}"></td>
             <td>
@@ -35,7 +69,30 @@
                 <a th:href="@{product/edit}">Sua</a>
             </td>
             <td>
-                <a th:href="@{product/delete/{id}(id=${product.id})}">delete</a>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="${'#myModal'+product.id}">
+                    delete
+                </button>
+
+                <div class="modal" th:id="${'myModal'+product.id}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                Detele Product <span th:text="${product.nameProduct}"></span>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                <a class="btn btn-primary" th:href="@{product/delete/{id}(id=${product.id})}">delete</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+<!--                <a th:href="@{product/delete/{id}(id=${product.id})}">delete</a>-->
             </td>
         </tr>
 

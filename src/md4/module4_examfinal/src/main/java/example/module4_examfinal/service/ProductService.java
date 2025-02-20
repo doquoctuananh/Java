@@ -30,4 +30,9 @@ public class ProductService implements IProductService {
     public void saveProduct(Product product) {
         productRepository.save(product);
     }
+
+    @Override
+    public List<Product> searchProducts(String name, Double price, Long typeId) {
+        return productRepository.searchProducts(name, price, typeId);
+    }
 }

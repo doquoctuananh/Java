@@ -11,4 +11,6 @@ public interface IProductService {
 //    List<Product> findAllProducts();
     Product findProductById(int id);
     void saveProduct(Product product);
+
+    List<Product> searchProducts(String name, Double price, Long typeId);
 }

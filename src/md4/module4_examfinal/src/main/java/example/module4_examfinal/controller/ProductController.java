@@ -42,12 +42,13 @@ public class ProductController {
     }
 
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute ProductDTO productDTO,
-                         BindingResult bindingResult,
+    public String create(@Valid @ModelAttribute("product") ProductDTO productDTO, BindingResult bindingResult,
                          Model model) {
         Product product = new Product();
         if(bindingResult.hasErrors()) {
             model.addAttribute("product", productDTO);
+            List<TypeProduct> typeProducts = typeProductService.findAllTypeProducts();
+            model.addAttribute("typeProducts", typeProducts);
             return "create";
         }
         product.setNameProduct(productDTO.getNameProduct());

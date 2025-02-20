@@ -16,7 +16,7 @@ public class Product {
 
     private double price;
 
-    private String status;
+    private String status="da ban";
 
     @ManyToOne
     @JoinColumn(name = "type_product_id") // Khóa ngoại

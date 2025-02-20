@@ -11,10 +11,10 @@ public class ProductDTO {
     private String nameProduct;
 
     @NotNull(message = "khong duoc de trong")
-    @Min(value = 100000,message = "gia tu 100.000VND")
+    @Min(value = 100000,message = "gia lon hon 100.000VND")
     private double price;
 
-
+    @NotNull(message = "khong duoc de trong")
     private long typeProduct;
 
     public ProductDTO() {
