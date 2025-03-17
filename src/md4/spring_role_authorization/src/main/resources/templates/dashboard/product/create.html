@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        span{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center">Thêm Sản Phẩm</h2>
+    <form th:action="@{/dashboard/product/create}" method="post" th:object="${productDTO}">
+        <div class="mb-3">
+            <label class="form-label">Tên Product:</label>
+            <input  th:field="*{name}" type="text" class="form-control" name="name" placeholder="Nhập tên san pham">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" ></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Color Product:</label>
+            <input th:field="*{color}" type="text" class="form-control" name="color" placeholder="Nhập mau sac">
+            <span th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Price:</label>
+            <input th:field="*{price}" type="number" class="form-control" name="price" >
+            <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Guarantee:</label>
+            <input th:field="*{guarantee}" type="date" class="form-control" name="guarantee" placeholder="Nhập ngay bao hanh">
+            <span th:if="${#fields.hasErrors('guarantee')}" th:errors="*{guarantee}"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Stock:</label>
+            <input th:field="*{stock}" type="number" class="form-control" name="stock" placeholder="Nhập so luong">
+            <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Capacity:</label>
+            <input th:field="*{capacity}" type="text" class="form-control" name="capacity" placeholder="Nhập dung luong">
+            <span th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Image:</label>
+            <input th:field="*{image}" type="text" class="form-control" name="image" >
+            <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Category:</label>
+            <select th:field="*{category}">
+                <option th:each="category : ${Category}"
+                        th:value="${category.id}"
+                th:text="${category.name}"></option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Thêm sản phẩm</button>
+
+    </form>
+    <a class="mt-2 btn btn-dark" th:href="@{/dashboard}">Back home</a>
+</div>
+</body>
+</html>

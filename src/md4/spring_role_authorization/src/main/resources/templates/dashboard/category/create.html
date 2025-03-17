@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      max-width: 600px;
+      margin-top: 50px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    span{
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2 class="text-center">Thêm Sản Phẩm</h2>
+  <form th:action="@{/dashboard/category/create}" method="post" th:object="${categoryDTO}">
+    <div class="mb-3">
+      <label class="form-label">Tên Category:</label>
+      <input  th:field="*{name}" type="text" class="form-control" name="name" placeholder="Nhập tên nhan hang">
+      <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" ></span>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Email Category</label>
+      <input th:field="*{email}" type="email" class="form-control" name="email" placeholder="Nhập email nhan hang">
+      <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Phone</label>
+      <input th:field="*{phone}" type="text" class="form-control" name="phone" placeholder="Nhập SDT nhan hang">
+      <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Thêm nhãn hàng</button>
+  </form>
+  <a class="mt-2 btn btn-dark">Back home</a>
+</div>
+</body>
+</html>

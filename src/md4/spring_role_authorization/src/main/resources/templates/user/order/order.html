@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="container mt-5">
+        <a class="btn btn-primary" th:href="@{/user}">Back Home:</a>
+        <h2>Order Products :</h2>
+        <div class="container mt-4">
+            <div class="row">
+                <!-- Cột bảng sản phẩm -->
+                <div class="col-md-7">
+                    <table class="table table-bordered text-center">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Quantity</th>
+                            <th>Thành Tiền</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="cartItem : ${cartItemList}">
+                            <td th:text="${cartItem.product.name}"></td>
+                            <td>
+                                <img th:src="${cartItem.product.image}" class="img-fluid rounded" style="width: 100px; height: 70px;">
+                            </td>
+                            <td>
+                                <span th:text="${cartItem.quantity}"></span>
+                            </td>
+                            <td th:text="${#numbers.formatDecimal(cartItem.quantity * cartItem.product.price, 0, 'COMMA', 0, 'POINT')}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <h4 class="text-end">Tổng tiền:
+                        <span th:text="${#numbers.formatDecimal(totalPrice,0,'COMMA',0,'POINT')} + ' đ'" class="text-danger"></span>
+                    </h4>
+                </div>
+
+                <!-- Cột form đặt hàng -->
+                <div class="col-md-5">
+                    <div class="card p-3 shadow-lg rounded">
+                        <h4 class="text-center text-primary">Thông Tin Đặt Hàng</h4>
+                        <form th:action="@{/orders}" th:object="${orderDTO}" method="post">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Name</label>
+                                <input type="text" class="form-control" th:field="*{name}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Phone</label>
+                                <input type="text" class="form-control" th:field="*{phone}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Address</label>
+                                <input type="text" class="form-control" th:field="*{address}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Method Payment</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
+                                    <select class="form-select" th:field="*{paymentMethod}">
+                                        <option th:value="Offline">💵 Thanh toán khi nhận hàng</option>
+                                        <option th:value="Online">💳 Thanh toán online</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Thanh Toán</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

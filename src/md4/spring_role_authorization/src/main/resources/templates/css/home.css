@@ -1,0 +1,18 @@
+.container_body{
+    background-color: #EF3B3A;
+    height: 100vh;
+}
+.container_left{
+    background-color: #EF3B3A;
+    height: 100vh;
+}
+.container_left{
+    height: 100vh;
+    background-color: #b3b3b3;
+}
+.container_left a{
+    color: white;
+    background-color: #4CAF50;
+    width: 100%;
+    margin-top: 4px;
+}
